@@ -1,3 +1,14 @@
+# Animal Crossing Villager Wiki :raccoon::desert_island:
+
+This project is inspired by Animal Crossing which is one of my favorite games. :video_game:
+This website allows you to see all the different from the different Animal Crossing games, and see all their information. The villagers can be filtered by gender, species, personality, birthday and zodiac sign.
+
+For this project I have used Next.js, React, Typescript and Tailwind CSS.
+
+Huge thanks to the community behind [Nookipedia](https://api.nookipedia.com/) for allowing me access to their API :sparkling_heart:
+
+<hr>
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
