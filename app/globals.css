@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Seurat';
+  src: url('./../public/assets/fonts/FOT-Seurat-Pro-B.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Bokutoh';
+  src: url('./../public/assets/fonts/FOT-RodinBokutoh-Pro-EB.otf') format('opentype');
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -18,10 +27,37 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: linear-gradient(-45deg, #fbfeb2, #bee893);
+  background-attachment: fixed;
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+}
+
+
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.cardHoverEffect {
+  filter: drop-shadow(5px 5px 10px #dedede);
+}
+
+.cardHoverEffect:hover, .cardHover:hover {
+  transform: scale(1.15);
+  transition: transform 0.5s ease-in-out;
+}
+
+.cardHoverEffect:hover {
+  transform: rotate(5deg);
+  transition: transform 0.5s ease-in-out;
 }
