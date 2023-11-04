@@ -14,13 +14,14 @@ export default function Page({ params } : { params: { slug: string }}) {
             const villager = await fetchVillager(slug, id)
             setVillager(villager)
         }
-        getVillager(params.slug, query)
-    }, [])
+        if (params.slug && query && !villager) {
+            getVillager(params.slug, query)
+        }
+    }, [params.slug, query])
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">{
+        <main className='flex min-h-screen flex-col items-center justify-between p-24'>{
             villager && (
-
-                <h1 className="text-4xl font-bold">{villager.name}</h1>
+                <h1 className='text-4xl font-bold'>{villager.name}</h1>
             )
         }
         </main>
