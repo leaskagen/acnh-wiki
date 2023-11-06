@@ -9,12 +9,14 @@ import Link from 'next/link'
 
 type Props = {
     updateCategory: (category: string, subcategory: string) => void
+    searchVillager: (search: string) => void
     villagers: Villager[]
 }
 
-export default function Navbar({ updateCategory, villagers }: Props) {
+export default function Navbar({ updateCategory, searchVillager, villagers }: Props) {
     const [categories, setCategories] = useState<Category[]>([])
 
+    // Add categories to filter villagers by
     useEffect(() => {
         if (villagers) {
             var categoriesArray: Category[] = []
@@ -43,18 +45,33 @@ export default function Navbar({ updateCategory, villagers }: Props) {
         }
     }, [villagers])
     
+    // Filter by a category
     const selectCategory = (category: string, subcategory: string) => {
         updateCategory(category, subcategory)
     }
 
+    // Remove all filters
     const resetCategory = () => {
         updateCategory('all', 'all')
+    }
+
+    // Filter with search input
+    const updateSearch: any = (event: Event) => {
+        // @ts-ignore
+        if (event.target?.value === '') {
+            resetCategory()
+            // @ts-ignore
+        } else if (event.target?.value) {
+            // @ts-ignore
+            searchVillager(event.target.value)
+        }
     }
     
     return (
         <nav className='h-full w-[325px] bg-[#F8F5DF] flex flex-col justify-between gap-4 fixed py-6 top-0 left-0' style={{
             boxShadow: '10px -2px 30px -13px rgba(0,0,0,0.4)',
-            overflowY: 'auto'
+            overflowY: 'auto',
+            overflowX: 'hidden'
         }}>
             <div>
                 <Link href='/' onClick={resetCategory}>
@@ -66,14 +83,15 @@ export default function Navbar({ updateCategory, villagers }: Props) {
                         }}>Villager Wiki</h3>
                     </header>
                 </Link>
+                <input type='text' onChange={updateSearch} placeholder='Search by name' className='mx-10 my-3 py-3 px-6 border-[#D7D2BA] placeholder-[#D7D2BA] focus:ring-0 focus:outline-none focus:border-[#74664B] text-[#74664B] border-4 rounded-xl'></input>
                 { categories.map((category) => (
                     <NavDropDown category={category.category} subcategories={category.subcategories} key={category.category} selectCategory={selectCategory} />    
                 ))}
             </div>
             <footer>
-                <div className='flex flex-col items-center justify-center mt-10'>
-                    <span className='text-[#74664B] text-md'>Made by Lea Skagen ❤️</span>
-                    <span className='text-[#74664B] text-sm underline'><a href='https://github.com/leaskagen/acnh-wiki'>See Github Repository</a></span>
+                <div className='flex flex-col items-center justify-center mt-10 text-[#74664B]'>
+                    <span className='text-md'>Made by Lea Skagen ❤️</span>
+                    <span className='text-sm underline'><a href='https://github.com/leaskagen/acnh-wiki'>See Github Repository</a></span>
                 </div>
             </footer>
         </nav>

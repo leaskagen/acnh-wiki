@@ -13,6 +13,7 @@ export default function Home() {
   const [birthDates, setBirthDates] = useState<string[]>([])
   const [category, setCategory] = useState<string>('all')
   const [subcategory, setSubcategory] = useState<string>('all')
+  const [showingSearch, setShowingSearch] = useState<Boolean>(false)
 
   // Fetch villagers on page load
   useEffect(() => {
@@ -25,6 +26,7 @@ export default function Home() {
   }, [])
 
   const updateCategory = (category: string, subcategory: string) => {
+    setShowingSearch(false)
     setCategory(category)
     setSubcategory(subcategory.toLowerCase())
 
@@ -54,10 +56,16 @@ export default function Home() {
     }
   }
 
+  const searchVillager = (search: string) => {
+    setFilteredVillagers(villagers.filter((villager: any) => villager.name.toLowerCase().includes(search.toLowerCase())))
+    setSubcategory(search)
+    setShowingSearch(true)
+  }
+
   return (
     <>
-      <Navbar updateCategory={updateCategory} villagers={villagers} />
-      <main className='flex min-h-screen flex-col items-center justify-between p-12'>
+      <Navbar updateCategory={updateCategory} searchVillager={searchVillager} villagers={villagers} />
+      <main className='flex min-h-screen flex-col items-center justify-between ml-[300px] p-12'>
         <header className='flex flex-col items-center justify-center mb-12 w-full h-[220px]'
         style={{
           backgroundImage: 'url(/assets/images/text-bubble.png)',
@@ -65,9 +73,17 @@ export default function Home() {
           backgroundSize: 'contain',
           backgroundPosition: 'center',
         }}>
-          <h1 className='text-3xl text-[#74664B] font-bokutoh'>Currently showing <span className={category === 'Birthday' ? 'capitalize' : ''}>{subcategory}</span> villagers ({filteredVillagers.length})</h1>
+          {showingSearch ? (
+            <h1 className='text-3xl text-[#74664B] font-bokutoh text-center'>
+              Currently showing all villagers named <br/>{subcategory} ({filteredVillagers.length})
+            </h1>
+          ) : (
+            <h1 className='text-3xl text-[#74664B] font-bokutoh'>
+              Currently showing <span className={category === 'Birthday' ? 'capitalize' : ''}>{subcategory}</span> villagers ({filteredVillagers.length})
+            </h1>
+          )}
         </header>
-        {category === 'Birthday' ? (
+        {category === 'Birthday' && !showingSearch ? (
           <div>
             {birthDates.map((birthDate) => (
               <div className='grid grid-cols-4 gap-12 mb-12' key={birthDate}>
@@ -84,7 +100,7 @@ export default function Home() {
             ))}
           </div>
         ) : (
-          <div className='grid grid-cols-4 gap-12'>
+          <div className='flex flex-wrap justify-center gap-12'>
             {filteredVillagers.map((villager) => (
               <Link key={villager.image_url} href={{
                 pathname: `/villager/${villager.name.toLowerCase().replace(/\s/g, '-')}`,

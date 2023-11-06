@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className='font-seurat ml-[300px]'>
+      <body className='font-seurat'>
         {children}
       </body>
     </html>

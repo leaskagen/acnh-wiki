@@ -10,7 +10,7 @@ const fetchRequest = async (url: string) => {
 
 // Fetch all villagers
 export const fetchVillagers = async () => {
-  const villagers: Villager[] = await fetchRequest('https://api.nookipedia.com/villagers')
+  const villagers: Villager[] = await fetchRequest('https://api.nookipedia.com/villagers?game=nh')
   return villagers;
 }
 
@@ -20,7 +20,7 @@ export const fetchVillagers = async () => {
 // some villagers share the same name, so we need the id to differentiate them
 export const fetchVillager = async (slug: string, id: string) => {
   var name = slug[0].includes('-') ? slug[0].split('-').join(' ') : slug[0]
-  const villagers: Villager[] = await fetchRequest(`https://api.nookipedia.com/villagers?name=${name}`)
+  const villagers: Villager[] = await fetchRequest(`https://api.nookipedia.com/villagers?game=nh&nhdetails=true&name=${name}`)
   const villager: Villager = villagers.find(villager => villager.id === id) as Villager
   return villager
 }
