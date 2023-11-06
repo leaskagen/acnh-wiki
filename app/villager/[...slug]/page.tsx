@@ -41,7 +41,7 @@ export default function Page({ params } : { params: { slug: string }}) {
                                             <h3>Colors:</h3>
                                             <ul>
                                                 {villager.nh_details.fav_colors.map((color) => (
-                                                    <li>{color}</li>
+                                                    <li key={color}>{color}</li>
                                                 ))}
                                             </ul>
                                         </div>
@@ -49,7 +49,7 @@ export default function Page({ params } : { params: { slug: string }}) {
                                             <h3>Styles:</h3>
                                             <ul>
                                                 {villager.nh_details.fav_styles.map((style) => (
-                                                    <li>{style}</li>
+                                                    <li key={style}>{style}</li>
                                                 ))}
                                             </ul>
                                         </div>
