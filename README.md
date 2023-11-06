@@ -2,8 +2,8 @@
 
 [See website here](https://animalcrossingvillagerwiki.netlify.app/)
 
-This project is inspired by Animal Crossing which is one of my favorite games. :video_game:
-This website allows you to see all the different villagers from Animal Crossing New Horizons, and their information. The villagers can be filtered by name with a search input field, or filtered by the following categories: gender, species, personality, birthday and zodiac sign.
+This project is inspired by Animal Crossing New Horizons which is one of my favorite games. :video_game:
+This website allows you to see all the different villagers from the game, and their information. The villagers can be filtered by name with a search input field, or filtered by the following categories: gender, species, personality, birthday and zodiac sign.
 
 For this project I have used Next.js, React, Typescript and Tailwind CSS.
 

@@ -65,7 +65,7 @@ export default function Home() {
   return (
     <>
       <Navbar updateCategory={updateCategory} searchVillager={searchVillager} villagers={villagers} />
-      <main className='flex min-h-screen flex-col items-center justify-between ml-[300px] p-12'>
+      <main className='flex min-h-screen flex-col items-center ml-[300px] p-12'>
         <header className='flex flex-col items-center justify-center mb-12 w-full h-[220px]'
         style={{
           backgroundImage: 'url(/assets/images/text-bubble.png)',
